@@ -27,7 +27,11 @@ pipeline {
         stage('TerraformFormat'){
             steps {
                 dir('.'){
+<<<<<<< HEAD
                     sh "terraform fmt"
+=======
+                    sh "terraform fmt -list=true -write=false -diff=true -check=true"
+>>>>>>> af3249369957a466b3e791c0d930e2460f8e3d76
                 }
             }
         }
@@ -68,7 +72,7 @@ pipeline {
                          currentBuild.result = 'UNSTABLE'
                     }
                     if(apply){
-                        dir('./'){
+                        dir('.'){
                             unstash "terraform-plan"
                             sh 'terraform apply terraform.tfplan'
                         }
