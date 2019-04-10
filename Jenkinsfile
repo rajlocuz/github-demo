@@ -17,9 +17,7 @@ pipeline {
             stage('TerraformInit'){
             steps {
                 dir('.'){
-                    sh "terraform init"
-                    sh "echo \$PWD"
-                    sh "whoami"
+                    sh "terraform init -input=false"
                 }
             }
         }
@@ -49,6 +47,7 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
+
                         sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
                         -out terraform.tfplan;echo \$? > status"
                         stash name: "terraform-plan", includes: "terraform.tfplan"
