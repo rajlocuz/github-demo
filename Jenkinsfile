@@ -17,7 +17,7 @@ pipeline {
             stage('TerraformInit'){
             steps {
                 dir('.'){
-                    sh "terraform init -input=false"
+                    sh "terraform init"
                     sh "echo \$PWD"
                     sh "whoami"
                 }
@@ -27,11 +27,7 @@ pipeline {
         stage('TerraformFormat'){
             steps {
                 dir('.'){
-<<<<<<< HEAD
                     sh "terraform fmt"
-=======
-                    sh "terraform fmt -list=true -write=false -diff=true -check=true"
->>>>>>> af3249369957a466b3e791c0d930e2460f8e3d76
                 }
             }
         }
